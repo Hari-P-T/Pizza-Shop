@@ -116,12 +116,18 @@ public:
         products.push_back(item);
         totalPrice += item.getPrice();
         amountPayable = totalPrice;
+        if (products.size() >=2) {
+            discount = true;
+        }
     }
 
     void addPizza(Pizza& pizza) {
         pizzas.push_back(pizza);
         totalPrice += pizza.getTotalPrice();
         amountPayable = totalPrice;
+        if (products.size() >=2) {
+            discount = true;
+        }
     }
 
     void applyDiscount() {
@@ -144,6 +150,7 @@ public:
         cout << "Total Price: " << totalPrice << " Rs\n";
         if (discount) {
             cout << "Discount Applied: " << discountPercentage << "%\n";
+            amountPayable = totalPrice* float((100 - discountPercentage) / 100);
         }
         cout << "Amount Payable: " << amountPayable << " Rs\n";
     }
@@ -168,13 +175,13 @@ public:
 
 void initializeMenu(Menu& menu) {
     menu.addBase("Regular", 50);
-    menu.addBase("Whole wheat", 75);
+    menu.addBase("WholeWheat", 75);
 
-    menu.addSauce("Marinara sauce");
-    menu.addSauce("Pesto sauce");
+    menu.addSauce("Marinara");
+    menu.addSauce("Pesto");
 
-    menu.addTopping("Mozzarella cheese", 30);
-    menu.addTopping("Cheddar cheese", 35);
+    menu.addTopping("Mozzarella", 30);
+    menu.addTopping("Cheddar", 35);
     menu.addTopping("Spinach", 20);
     menu.addTopping("Corn", 15);
     menu.addTopping("Mushroom", 15);
@@ -184,8 +191,8 @@ void initializeMenu(Menu& menu) {
     menu.addItem("Pepsi", 17, "drink");
     menu.addItem("7-up", 19, "drink");
     menu.addItem("Coke", 20, "drink");
-    menu.addItem("Lava cake", 95, "dessert");
-    menu.addItem("Chocolate brownie", 86, "dessert");
+    menu.addItem("LavaCake", 95, "dessert");
+    menu.addItem("ChocolateBrownie", 86, "dessert");
 }
 
 void choose(Menu& menu, Bill& bill) {
